@@ -1,0 +1,54 @@
+== Spring Bean Scope
+
+
+Spring Bean Scope 동작 알아보기
+
+- singleton
+- prototype
+
+==== singleton
+하나의 Bean 인스턴스로 관리 됨.
+
+==== prototype
+특정 빈에 대한 요청이 이루어질 때마다 새 빈 인스턴스를 생성. +
+Bean 을 요청할 때마다 새로 인스턴스화된 Bean 을 사용한다고 보면 됨.
+
+link:https://docs.spring.io/spring-framework/docs/current/reference/html/core.html#beans-factory-scopes[spring reference - Bean Scopes]
+
+=== 동작확인하기
+
+==== 1. singleton Bean 에 singleton Bean 주입
+
+BeanScopeSingletonController < SingletonComponent 주입
+
+* [GET]http://localhost/bean/scope/singleton/singleton/plus
+* [GET]http://localhost/bean/scope/singleton/singleton/minus
+* [GET]http://localhost/bean/scope/singleton/singleton/print
+
+
+==== 2. singleton Bean 에 prototype Bean 주입
+
+BeanScopeSingletonController < PrototypeComponent 주입
+
+* [GET]http://localhost/bean/scope/singleton/prototype/plus
+* [GET]http://localhost/bean/scope/singleton/prototype/minus
+* [GET]http://localhost/bean/scope/singleton/prototype/print
+
+
+=============
+.참고
+주입된 prototype Bean 호출 시 주입 받은 Bean 이 Singleton 인 경우 +
+singleton Bean 을 호출한 것 과 같이 동작함. +
+이유는 singleton Bean 에 prototype Bean 주입 시 처음 Bean 을 생성할 때 한번만 주입하기 떄문 +
+그래서 Controller 호출 시 마다 prototype Bean 을 parameter 로 받아서 주입된 prototype Bean 을 교체함
+=============
+
+
+==== 3. prototype Bean 에 prototype Bean 주입
+
+BeanScopePrototypeController < PrototypeComponent 주입
+
+* [GET]http://localhost/bean/scope/prototype/prototype/plus
+* [GET]http://localhost/bean/scope/prototype/prototype/minus
+* [GET]http://localhost/bean/scope/prototype/prototype/print
+

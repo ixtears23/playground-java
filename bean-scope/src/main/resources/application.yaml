@@ -1,0 +1,9 @@
+logging:
+  level:
+    com:
+      ibdata:
+        sample:
+          beanscope: debug
+
+server:
+  port: 80
